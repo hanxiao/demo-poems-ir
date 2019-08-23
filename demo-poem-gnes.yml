@@ -1,0 +1,22 @@
+version: '3.4'
+services:
+  Frontend00:
+    image: gnes/gnes:latest-alpine
+    command: frontend --grpc_port 5566 --port_out 64382 --socket_out PUSH_BIND --port_in
+      57292 --socket_in PULL_BIND
+    ports:
+    - 5566:5566
+  Preprocessor10:
+    image: demo-poem-preprocess
+    command: --port_in 64382 --socket_in PULL_CONNECT --port_out 52339
+      --socket_out PUSH_BIND --host_in Frontend00
+  Encoder20:
+    image: demo-poem-encode
+    command: --port_in 52339 --socket_in PULL_CONNECT --port_out 57292 --socket_out
+      PUSH_CONNECT --host_out Frontend00 --host_in Preprocessor10
+volumes: {}
+networks:
+  gnes-net:
+    driver: overlay
+    attachable: true
+configs: {}
