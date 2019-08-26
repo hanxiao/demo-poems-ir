@@ -28,7 +28,6 @@ class TestEncoder(unittest.TestCase):
             '--socket_in', str(SocketType.PULL_CONNECT),
             '--socket_out', str(SocketType.PUSH_CONNECT),
             '--yaml_path', 'transformer.yml',
-            '--py_path', 'transformer.py'
         ])
 
         with ServiceManager(EncoderService, e_args), \
@@ -40,3 +39,4 @@ class TestEncoder(unittest.TestCase):
             stub = gnes_pb2_grpc.GnesRPCStub(channel)
             resp = stub.Call(list(RequestGenerator.index([b'hello world', b'goodbye!'], 1))[0])
             self.assertEqual(resp.request_id, 0)
+            print(resp)

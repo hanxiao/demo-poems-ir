@@ -11,9 +11,11 @@ set -e
 docker stack rm my-gnes && sleep ${SLEEP_SEC}
 
 # build preprocess image
-cd preprocess && docker build -t demo-poem-preprocess . && cd -
+cd preprocess && docker build --network=host -t gnes/demo:poem-preprocess . && cd -
 # build encode image
-cd encode && docker build -t demo-poem-encode . && cd -
+cd encode && docker build --network=host -t gnes/demo:poem-encode . && cd -
+# build index image
+cd index && docker build --network=host -t gnes/demo:poem-index . && cd -
 
 # deploy the whole stack and sleep for a while until it's done
 docker stack deploy --compose-file demo-poem-gnes.yml my-gnes && sleep ${SLEEP_SEC}

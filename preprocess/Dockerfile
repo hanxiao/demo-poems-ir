@@ -1,4 +1,4 @@
-FROM gnes/gnes:stable-alpine
+FROM gnes/gnes:latest-alpine
 
 ADD poem_preproc.py .
 
