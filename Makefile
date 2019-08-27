@@ -17,6 +17,10 @@ pull:
 	docker pull gnes/demo:poem-vector-index && \
 	docker pull gnes/demo:poem-fulltext-index && \
 	docker pull gnes/demo:poem-client
-clean: ; rm -rf .cache && mkdir .cache && docker stack rm my-gnes
-deploy: ; mkdir .cache -p && docker stack deploy --compose-file demo-poem-gnes.yml my-gnes
-run: ; unset https_proxy && unset http_proxy && docker run --rm --network host -v ${PWD}/data:/data/ gnes/demo:poem-client --mode index --batch_size 4 --txt_file /data/kaggle_poem_dataset.csv
+clean: ; rm -rf .cache && mkdir -p .cache && docker stack rm my-gnes
+deploy: ; mkdir -p .cache && docker stack deploy --compose-file demo-poem-index.yml my-gnes
+index: ; unset https_proxy && unset http_proxy && docker run --rm --network host -v ${PWD}/data:/data/ gnes/demo:poem-client --mode index --batch_size 4 --txt_file /data/kaggle_poem_dataset.csv
+query:
+    docker stack rm my-gnes && \
+	docker stack deploy --compose-file demo-poem-query.yml my-gnes && \
+	unset https_proxy && unset http_proxy && docker run --rm --network host -v ${PWD}/data:/data/ gnes/demo:poem-client --mode query --txt_file /data/kaggle_poem_dataset.csv

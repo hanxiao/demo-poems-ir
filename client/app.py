@@ -19,6 +19,13 @@ class MyClient(CLIClient):
                                                             batch_size=self.args.batch_size)):
                 p_bar.update()
 
+    def query(self, all_bytes: List[bytes], stub):
+        for idx, q in enumerate(all_bytes):
+            for req in RequestGenerator.query(q, request_id_start=idx, top_k=self.args.top_k):
+                resp = stub.Call(req)
+                print('query %d result: %s' % (req, resp))
+                input('press any key to continue...')
+
 
 if __name__ == '__main__':
     MyClient(set_client_cli_parser().parse_args())
