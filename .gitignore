@@ -120,7 +120,6 @@ toy*.py
 toy*.py
 post/
 toy*.ipynb
-data/
 *.c
 .nes_cache
 toy*.py

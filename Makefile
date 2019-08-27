@@ -18,5 +18,5 @@ pull:
 	docker pull gnes/demo:poem-fulltext-index && \
 	docker pull gnes/demo:poem-client
 clean: ; rm -rf .cache && mkdir .cache && docker stack rm my-gnes
-deploy: ; docker stack deploy --compose-file demo-poem-gnes.yml my-gnes
+deploy: ; mkdir .cache -p && docker stack deploy --compose-file demo-poem-gnes.yml my-gnes
 run: ; unset https_proxy && unset http_proxy && docker run --rm --network host -v ${PWD}/data:/data/ gnes/demo:poem-client --mode index --batch_size 4 --txt_file /data/kaggle_poem_dataset.csv
