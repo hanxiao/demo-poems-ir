@@ -21,11 +21,12 @@ services:
     volumes:
       - ./.cache:/workspace
   Indexer21:
-    image: gnes/demo:poem-fulltext-index
-    command: --port_in 56264 --socket_in SUB_CONNECT --port_out 57909 --socket_out
-      PUSH_CONNECT --host_out Router40 --host_in Preprocessor10
+    image: gnes/gnes:latest-alpine
+    command: index --port_in 56264 --socket_in SUB_CONNECT --port_out 57909 --socket_out
+      PUSH_CONNECT --host_out Router40 --host_in Preprocessor10 --yaml_path /yaml/index.yml
     volumes:
       - ./.cache:/workspace
+      - ./fulltext-index:/yaml
   Router40:
     image: gnes/gnes:latest-alpine
     command: route --num_part 2 --port_in 57909 --socket_in PULL_BIND --port_out 57908 --socket_out

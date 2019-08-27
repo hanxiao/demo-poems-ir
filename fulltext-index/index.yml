@@ -1,4 +1,4 @@
-!SimpleDictIndexer
+!DictIndexer
 gnes_config:
   name: my_fulltext_indexer  # a customized name
   work_dir: /workspace

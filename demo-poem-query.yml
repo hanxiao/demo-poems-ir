@@ -17,12 +17,19 @@ services:
   Indexer30:
     image: gnes/demo:poem-vector-index
     command: --port_in 64886 --socket_in PULL_BIND --port_out 57909 --socket_out
-      PUSH_BIND
+      PUSH_CONNECT --host_out Router40
     volumes:
       - ./.cache:/workspace
+  Router40:
+    image: gnes/gnes:latest-alpine
+    command: route --socket_in PULL_BIND --socket_out PUSH_BIND --port_in 57909 --port_out 57910 --yaml_path ChunkToDocRouter
   Indexer21:
-    image: gnes/demo:poem-fulltext-index
-    command: --port_in 57909 --socket_in PULL_CONNECT --port_out 57908 --socket_out
-      PUSH_CONNECT --host_out Frontend00 --host_in Indexer30
+    image: gnes/gnes:latest-alpine
+    command: index --port_in 57910 --socket_in PULL_CONNECT --port_out 57911 --socket_out
+      PUSH_CONNECT --host_out Router50 --host_in Router40 --yaml_path /yaml/index.yml
     volumes:
       - ./.cache:/workspace
+      - ./fulltext-index:/yaml
+  Router50:
+    image: gnes/gnes:latest-alpine
+    command: route --socket_in PULL_BIND --socket_out PUSH_CONNECT --port_in 57911 --port_out 57908 --yaml_path DocFillRouter
