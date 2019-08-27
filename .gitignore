@@ -124,6 +124,7 @@ toy*.ipynb
 .nes_cache
 toy*.py
 toy*.yml
+toy*.txt
 *.tmp
 
 shell/gnes-wizard.sh
