@@ -9,8 +9,8 @@ from gnes.proto import RequestGenerator
 
 class MyClient(CLIClient):
     def read_all(self):
-        with open('data/kaggle_poem_dataset.csv', encoding='utf8') as csvfile:
-            return [json.dumps(rr).encode() for rr in csv.DictReader(csvfile, delimiter=',', quotechar='"')][:100]
+        return [json.dumps(rr).encode() for rr in csv.DictReader(self.args.txt_file, delimiter=',', quotechar='"')][
+               :100]
 
     def index(self, all_bytes: List[bytes], stub):
         with ProgressBar(all_bytes, self.args.batch_size, task_name='index') as p_bar:

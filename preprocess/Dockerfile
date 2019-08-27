@@ -1,5 +1,5 @@
 FROM gnes/gnes:latest-alpine
 
-ADD poem_preproc.py .
+ADD *.py ./
 
-ENTRYPOINT ["gnes", "preprocess", "--py_path", "poem_preproc.py", "--yaml_path", "SentSplitPreprocessor"]
+ENTRYPOINT ["gnes", "preprocess", "--py_path", "split.py", "--yaml_path", "SentSplitPreprocessor"]
