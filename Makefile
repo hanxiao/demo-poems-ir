@@ -20,6 +20,6 @@ clean: clean_data clean_stack
 deploy_index: ; mkdir -p .cache && docker stack deploy --compose-file demo-poem-index.yml my-gnes
 deploy_query: ; docker stack rm my-gnes && docker stack deploy --compose-file demo-poem-query.yml my-gnes
 client_index: ; unset https_proxy && unset http_proxy && docker run --rm --network host -v ${PWD}/data:/data/ gnes/demo:poem-client --mode index --batch_size 4 --txt_file /data/kaggle_poem_dataset.csv
-client_query: ; unset https_proxy && unset http_proxy && docker run --rm --network host -v ${PWD}/data:/data/ gnes/demo:poem-client --mode query --txt_file /data/kaggle_poem_dataset.csv
+client_query: ; unset https_proxy && unset http_proxy && docker run -it --rm --network host -v ${PWD}/data:/data/ gnes/demo:poem-client --mode query --txt_file /data/kaggle_poem_dataset.csv
 index: clean deploy_index
 query: clean_stack deploy_query
