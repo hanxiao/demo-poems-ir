@@ -1,17 +1,14 @@
 all: clean build push
 build:
 	cd encode && docker build --network=host -t gnes/demo:poem-encode . && cd - && \
-	cd preprocess && docker build --network=host -t gnes/demo:poem-preprocess . && cd - && \
 	cd vector-index && docker build --network=host -t gnes/demo:poem-vector-index . && cd - && \
 	cd client && docker build --network=host -t gnes/demo:poem-client . && cd -
 push:
 	docker push gnes/demo:poem-encode && \
-	docker push gnes/demo:poem-preprocess && \
 	docker push gnes/demo:poem-vector-index && \
 	docker push gnes/demo:poem-client
 pull:
 	docker pull gnes/demo:poem-encode && \
-	docker pull gnes/demo:poem-preprocess && \
 	docker pull gnes/demo:poem-vector-index && \
 	docker pull gnes/demo:poem-client
 clean_data: ; rm -rf .cache && mkdir -p .cache

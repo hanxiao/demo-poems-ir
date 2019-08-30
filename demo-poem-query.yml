@@ -7,9 +7,9 @@ services:
     ports:
     - 5566:5566
   Preprocessor10:
-    image: gnes/demo:poem-preprocess
-    command: --port_in 53463 --socket_in PULL_CONNECT --port_out 56264
-      --socket_out PUSH_BIND --host_in Frontend00
+    image: gnes/gnes:latest-alpine
+    command: preprocess --port_in 53463 --socket_in PULL_CONNECT --port_out 56264
+      --socket_out PUSH_BIND --host_in Frontend00 --yaml_path SentSplitPreprocessor
   Encoder20:
     image: gnes/demo:poem-encode
     command: --port_in 56264 --socket_in PULL_CONNECT --port_out 64886 --socket_out
@@ -23,7 +23,7 @@ services:
   Router40:
     image: gnes/gnes:latest-alpine
     command: route --socket_in PULL_BIND --socket_out PUSH_BIND --port_in 57909
-      --port_out 57910 --yaml_path ChunkToDocRouter
+      --port_out 57910 --yaml_path Chunk2DocTopkReducer
   Indexer21:
     image: gnes/gnes:latest-alpine
     command: index --port_in 57910 --socket_in PULL_CONNECT --port_out 57911 --socket_out
@@ -34,4 +34,4 @@ services:
   Router50:
     image: gnes/gnes:latest-alpine
     command: route --socket_in PULL_BIND --socket_out PUSH_CONNECT --port_in 57911 --port_out 57908
-      --host_out Frontend00 --yaml_path DocFillRouter
+      --host_out Frontend00 --yaml_path DocFillReducer

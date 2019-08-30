@@ -7,9 +7,9 @@ services:
     ports:
     - 5566:5566
   Preprocessor10:
-    image: gnes/demo:poem-preprocess
-    command: --port_in 53463 --socket_in PULL_CONNECT --port_out 56264
-      --socket_out PUB_BIND --host_in Frontend00
+    image: gnes/gnes:latest-alpine
+    command: preprocess --port_in 53463 --socket_in PULL_CONNECT --port_out 56264
+      --socket_out PUB_BIND --host_in Frontend00 --yaml_path SentSplitPreprocessor
   Encoder20:
     image: gnes/demo:poem-encode
     command: --port_in 56264 --socket_in SUB_CONNECT --port_out 64886 --socket_out
