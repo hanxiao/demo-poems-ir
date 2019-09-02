@@ -7,6 +7,7 @@ from gnes.client.cli import CLIClient
 from gnes.proto import RequestGenerator
 from termcolor import colored
 
+import pprint
 
 class MyClient(CLIClient):
     def read_all(self):
@@ -21,8 +22,8 @@ class MyClient(CLIClient):
                 for k in resp.search.topk_results:
                     print(colored(k.doc.doc_id, 'magenta'))
                     print(colored(k.doc.raw_text, 'yellow'))
-                    print(colored(k.score, 'blue'))
-                    print(colored(k.score_explained, 'cyan'))
+                    print(colored(k.score.value, 'blue'))
+                    pprint.pprint(json.loads(k.score.explained))
                     input('press any key to continue...')
                 input('on to next query, press any key to continue...')
 
