@@ -11,11 +11,11 @@ services:
     command: preprocess --port_in 53463 --socket_in PULL_CONNECT --port_out 56264
       --socket_out PUB_BIND --host_in Frontend00 --yaml_path SentSplitPreprocessor
   Encoder20:
-    image: gnes/demo:poem-encode
+    image: gnes/demo-poem:encode
     command: --port_in 56264 --socket_in SUB_CONNECT --port_out 64886 --socket_out
       PUSH_CONNECT --host_out Indexer30 --host_in Preprocessor10
   Indexer30:
-    image: gnes/demo:poem-vector-index
+    image: gnes/demo-poem:vector-index
     command: --port_in 64886 --socket_in PULL_BIND --port_out 57909 --socket_out
       PUSH_CONNECT --host_out Router40
     volumes:

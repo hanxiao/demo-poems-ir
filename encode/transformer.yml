@@ -1,6 +1,6 @@
 !PipelineEncoder
 components:
-  - !PytorchTransformer
+  - !PyTorchTransformers
     parameters:
       model_dir: $TORCH_TRANSFORMERS_MODEL
       model_name: bert-base-uncased
