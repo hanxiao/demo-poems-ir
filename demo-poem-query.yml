@@ -26,12 +26,8 @@ services:
       --port_out 57910 --yaml_path Chunk2DocTopkReducer
   Indexer21:
     image: gnes/gnes:latest-alpine
-    command: index --port_in 57910 --socket_in PULL_CONNECT --port_out 57911 --socket_out
-      PUSH_CONNECT --host_out Router50 --host_in Router40 --yaml_path /yaml/index.yml
+    command: index --port_in 57910 --socket_in PULL_CONNECT --port_out 57908 --socket_out
+      PUSH_CONNECT --host_out Frontend00 --host_in Router40 --yaml_path /yaml/index.yml --sorted_response
     volumes:
       - ./.cache:/workspace
       - ./fulltext-index:/yaml
-  Router50:
-    image: gnes/gnes:latest-alpine
-    command: route --socket_in PULL_BIND --socket_out PUSH_CONNECT --port_in 57911 --port_out 57908
-      --host_out Frontend00 --yaml_path DocFillReducer
