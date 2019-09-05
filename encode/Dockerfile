@@ -5,10 +5,11 @@ LABEL maintainer="team@gnes.ai"
 RUN pip install pytorch-transformers --no-cache-dir --compile && \
     python -c "from pytorch_transformers import *; x='bert-base-uncased'; BertModel.from_pretrained(x); BertTokenizer.from_pretrained(x)"
 
-RUN echo 3
-RUN pip install git+https://github.com/gnes-ai/gnes.git --no-cache-dir --compile
-
 ADD *.py *.yml ./
+
+ARG BUILD_TIME
+
+RUN pip install git+https://github.com/gnes-ai/gnes.git --no-cache-dir --compile
 
 RUN python -m unittest test_transformer.py
 

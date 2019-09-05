@@ -1,5 +1,6 @@
 import csv
 import json
+import pprint
 from typing import List
 
 from gnes.cli.parser import set_client_cli_parser
@@ -7,7 +8,6 @@ from gnes.client.cli import CLIClient
 from gnes.proto import RequestGenerator
 from termcolor import colored
 
-import pprint
 
 class MyClient(CLIClient):
     def read_all(self):
