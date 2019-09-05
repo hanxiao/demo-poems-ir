@@ -1,7 +1,7 @@
 all: clean build push
 build:
-	cd encode && docker build --build-arg BUILD_TIME=$(date +%s) --network=host -t gnes/demo-poem:encode . && cd - && \
-	cd vector-index && docker build --build-arg BUILD_TIME=$(date +%s) --network=host -t gnes/demo-poem:vector-index . && cd - && \
+	cd encode && docker build --network=host -t gnes/demo-poem:encode . && cd - && \
+	cd vector-index && docker build --network=host -t gnes/demo-poem:vector-index . && cd - && \
 	cd client && docker build --network=host -t gnes/demo-poem:client . && cd -
 push:
 	docker push gnes/demo-poem:encode && \

@@ -12,7 +12,7 @@ from termcolor import colored
 class MyClient(CLIClient):
     def read_all(self):
         return [json.dumps(rr).encode() for rr in csv.DictReader(self.args.txt_file, delimiter=',', quotechar='"')][
-               :100]
+               :10]
 
     def query(self, all_bytes: List[bytes], stub):
         for idx, q in enumerate(all_bytes):

@@ -7,8 +7,8 @@ RUN apt-get update && apt-get install -y build-essential && \
 
 ADD *.py *.yml ./
 
-ARG BUILD_TIME
+RUN echo 6
 
-RUN /opt/conda/bin/pip install git+https://github.com/gnes-ai/gnes.git --no-cache-dir --compile
+RUN /opt/conda/bin/pip install git+https://github.com/gnes-ai/gnes.git@fix-numpy-indexer --no-cache-dir --compile
 
 ENTRYPOINT ["/opt/conda/bin/gnes", "index", "--yaml_path", "faiss.yml"]
