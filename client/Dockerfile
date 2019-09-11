@@ -1,4 +1,6 @@
-FROM gnes/gnes:latest-alpine
+FROM gnes/gnes:latest-buster
+
+RUN pip install git+https://github.com/gnes-ai/gnes.git@fix-cli-client --no-cache-dir --compile
 
 ADD *.py ./
 

@@ -12,17 +12,20 @@ As a start, run the following command to initialize the Docker Swarm environment
 docker swarm init
 ``` 
 
-## 1. Download required GNES images 
+## 1. Build images from local
+
+```bash
+make build
+```
+
+### (Optional) Download pre-built images
+
+If you have trouble building images yourself (e.g. due to slow connection or proxy issues), you can also pull our pre-build images for this demo. However, they may be outdated.   
 
 ```bash
 make pull
 ```
 
-### (Optional) Build images from local
-
-```bash
-make build
-```
 
 ## 2. Index all poems
 

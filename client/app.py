@@ -14,10 +14,10 @@ class MyClient(CLIClient):
         return [json.dumps(rr).encode() for rr in csv.DictReader(self.args.txt_file, delimiter=',', quotechar='"')][
                :10]
 
-    def query(self, all_bytes: List[bytes], stub):
+    def query(self, all_bytes: List[bytes]):
         for idx, q in enumerate(all_bytes):
             for req in RequestGenerator.query(q, request_id_start=idx, top_k=self.args.top_k):
-                resp = stub.Call(req)
+                resp = self.stub.Call(req)
                 print(colored(req.search.query, 'green'))
                 for k in resp.search.topk_results:
                     print(colored(k.doc.doc_id, 'magenta'))
