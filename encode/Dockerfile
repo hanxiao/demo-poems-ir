@@ -7,7 +7,7 @@ RUN pip install pytorch-transformers --no-cache-dir --compile && \
 
 ADD *.py *.yml ./
 
-RUN echo 6
+RUN echo 7
 
 RUN pip install git+https://github.com/gnes-ai/gnes.git --no-cache-dir --compile
 

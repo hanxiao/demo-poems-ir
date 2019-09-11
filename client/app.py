@@ -12,7 +12,7 @@ from termcolor import colored
 class MyClient(CLIClient):
     def read_all(self):
         return [json.dumps(rr).encode() for rr in csv.DictReader(self.args.txt_file, delimiter=',', quotechar='"')][
-               :10]
+               :self.args.num_poems]
 
     def query(self, all_bytes: List[bytes]):
         for idx, q in enumerate(all_bytes):
@@ -29,4 +29,8 @@ class MyClient(CLIClient):
 
 
 if __name__ == '__main__':
-    MyClient(set_client_cli_parser().parse_args())
+    parser = set_client_cli_parser()
+    parser.add_argument('--num_poems', type=int,
+                        default=10,
+                        help='number of poems to index')
+    MyClient(parser.parse_args())

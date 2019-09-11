@@ -1,6 +1,10 @@
 FROM gnes/gnes:latest-buster
 
-RUN pip install git+https://github.com/gnes-ai/gnes.git@fix-cli-client --no-cache-dir --compile
+RUN apt-get update && apt-get install --no-install-recommends -y git
+
+RUN echo 3
+
+RUN pip install -U git+https://github.com/gnes-ai/gnes.git --no-cache-dir --compile
 
 ADD *.py ./
 
