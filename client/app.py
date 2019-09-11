@@ -17,7 +17,7 @@ class MyClient(CLIClient):
     def query(self, all_bytes: List[bytes]):
         for idx, q in enumerate(all_bytes):
             for req in RequestGenerator.query(q, request_id_start=idx, top_k=self.args.top_k):
-                resp = self.stub.Call(req)
+                resp = self._stub.Call(req)
                 print(colored(req.search.query, 'green'))
                 for k in resp.search.topk_results:
                     print(colored(k.doc.doc_id, 'magenta'))
