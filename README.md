@@ -30,26 +30,37 @@ make pull
 ## 2. Index all poems
 
 ```bash
+# start the index server stack
 make index
 # wait for a minute until all services started and grpc is ready
 make client_index
 ```
 
+<p align="center">
+<a href="https://gnes.ai">
+<img src=".github/index.svg" alt="index">
+</a>
+</p>
+
 ## 3. Query and show top-10 poems
 
 ```bash
+# start the query server stack
 make query
 # wait for a minute until all services started and grpc is ready
 make client_query
 ```
-
+<p align="center">
+<a href="https://gnes.ai">
+<img src=".github/query.svg" alt="query">
+</a>
+</p>
 
 ## Other commands
 
 | Command | Description |
 |---|---|
-| `make clean` | Clean index files in `.cache` and remove all docker stacks |
-| `make clean_stack` | Remove all docker stacks |
+| `make clean` | Remove all docker stacks and release all network resources |
 | `make clean_data` | Remove all index files in `.cache` |
 | `make deploy_query` | Deploy the stack described in `demo-poem-query.yml` for query |
 | `make deploy_index` | Deploy the stack described in `demo-poem-index.yml` for index |

@@ -7,8 +7,10 @@ RUN apt-get update && apt-get install -y build-essential && \
 
 ADD *.py *.yml ./
 
-RUN echo 7
+# placeholder to force rebuild
+RUN echo 9
 
-RUN /opt/conda/bin/pip install git+https://github.com/gnes-ai/gnes.git --no-cache-dir --compile
+# you can install from PyPi, the following just ensure install latest master
+RUN /opt/conda/bin/pip install -U git+https://github.com/gnes-ai/gnes.git --no-cache-dir --compile
 
 ENTRYPOINT ["/opt/conda/bin/gnes", "index", "--yaml_path", "faiss.yml"]
