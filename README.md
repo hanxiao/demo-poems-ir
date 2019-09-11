@@ -12,17 +12,20 @@ As a start, run the following command to initialize the Docker Swarm environment
 docker swarm init
 ``` 
 
-## 1. Download required GNES images 
+## 1. Build images from local
+
+```bash
+make build
+```
+
+### (Optional) Download pre-built images
+
+If you have trouble building images yourself (e.g. due to slow connection or proxy issues), you can also pull our pre-build images for this demo. However, they may be outdated.   
 
 ```bash
 make pull
 ```
 
-### (Optional) Build images from local
-
-```bash
-make build
-```
 
 ## 2. Index all poems
 
@@ -54,6 +57,8 @@ make client_query
 
 ## Troubleshooting
 
+#### `Failed to remove some resources from stack: my-gnes`
+
 If you encounter the following errors when doing `make`, simply wait for couple of seconds. Docker is sometimes slow on recycling network device.
 
 ```bash
@@ -68,3 +73,12 @@ Creating service my-gnes_Router40
 failed to create service my-gnes_Router40: Error response from daemon: network my-gnes_default not found
 make: *** [deploy] Error 1
 ```
+
+#### Force rebuilding images after code change
+
+Thanks to the Docker cache, local change on the code may not be directly reflected in the Docker image. Therefore you can find placeholder such as `RUN echo 5` in some `Dockerfile`. Increase this number will trigger `make build` to rebuild the image accordingly.
+
+
+#### Be careful on the version mismatch
+
+To update the local GNES image, please do `docker pull gnes/gnes:latest-alpine` **before**  `make build`.
