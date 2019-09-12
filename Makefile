@@ -8,7 +8,7 @@ push:
 	docker push gnes/demo-poem:vector-index && \
 	docker push gnes/demo-poem:client
 pull:
-    docker pull gnes/gnes:latest-alpine && \
+	docker pull gnes/gnes:latest-alpine && \
 	docker pull gnes/demo-poem:encode && \
 	docker pull gnes/demo-poem:vector-index && \
 	docker pull gnes/demo-poem:client
