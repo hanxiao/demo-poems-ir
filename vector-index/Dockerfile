@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y build-essential && \
 ADD *.py *.yml ./
 
 # placeholder to force rebuild
-RUN echo 9
+RUN echo 11
 
 # you can install from PyPi, the following just ensure install latest master
 RUN /opt/conda/bin/pip install -U git+https://github.com/gnes-ai/gnes.git --no-cache-dir --compile
