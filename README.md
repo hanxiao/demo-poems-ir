@@ -18,7 +18,7 @@ docker swarm init
 make build
 ```
 
-### (Optional) Download pre-built images
+### (Optional - Not yet available on dockerhub) Download pre-built images
 
 If you have trouble building images yourself (e.g. due to slow connection or proxy issues), you can also pull our pre-build images for this demo. However, they may be outdated.   
 
