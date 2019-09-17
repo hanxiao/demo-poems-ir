@@ -8,9 +8,11 @@ from termcolor import colored
 
 
 class MyClient(CLIClient):
-    def read_all(self):
-        return [json.dumps(rr).encode() for rr in csv.DictReader(self.args.txt_file, delimiter=',', quotechar='"')][
-               :self.args.num_poems]
+
+    @property
+    def bytes_generator(self):
+        for rr in csv.DictReader(self.args.txt_file, delimiter=',', quotechar='"'):
+            yield json.dumps(rr).encode()
 
     def query_callback(self, req, resp):
         print(colored(req.search.query, 'green'))
