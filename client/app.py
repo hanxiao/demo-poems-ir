@@ -11,8 +11,12 @@ class MyClient(CLIClient):
 
     @property
     def bytes_generator(self):
+        num_rows = 0
         for rr in csv.DictReader(self.args.txt_file, delimiter=',', quotechar='"'):
             yield json.dumps(rr).encode()
+            num_rows += 1
+            if num_rows > self.args.num_poems:
+                return
 
     def query_callback(self, req, resp):
         print(colored(req.search.query, 'green'))

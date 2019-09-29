@@ -1,6 +1,6 @@
 all: clean build push
 build:
-	cd encode && docker build --network=host -t gnes/demo-poem:encode . && cd - && \
+	cd $(encoder)encode && docker build --network=host -t gnes/demo-poem:encode . && cd - && \
 	cd vector-index && docker build --network=host -t gnes/demo-poem:vector-index . && cd - && \
 	cd client && docker build --network=host -t gnes/demo-poem:client . && cd -
 push:

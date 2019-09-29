@@ -1,0 +1,8 @@
+!FlairEncoder
+parameters:
+  pooling_strategy: mean
+gnes_config:
+  name: my_flair  # a customized name
+  is_trained: true  # indicate the model has been trained
+  work_dir: /workspace
+  batch_size: 128

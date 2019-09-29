@@ -8,7 +8,7 @@ RUN pip install pytorch-transformers --no-cache-dir --compile && \
 ADD *.py *.yml ./
 
 # placeholder to force rebuild
-RUN echo 9
+RUN echo 10
 
 # you can install from PyPi, the following just ensure install latest master
 RUN pip install git+https://github.com/gnes-ai/gnes.git --no-cache-dir --compile
