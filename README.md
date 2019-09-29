@@ -56,6 +56,8 @@ make client_query
 </a>
 </p>
 
+
+
 ## Other commands
 
 | Command | Description |
@@ -65,6 +67,17 @@ make client_query
 | `make deploy_query` | Deploy the stack described in `demo-poem-query.yml` for query |
 | `make deploy_index` | Deploy the stack described in `demo-poem-index.yml` for index |
 
+## Next steps
+
+There are many ways to improve the quality of search results. To name a few,
+
+- **Score function**: right now the demo is using the average of all chunks' scores as the final relevance score. This can be improved by using more sophisticated scoring functions [as listed here](http://doc.gnes.ai/en/latest/api/gnes.score_fn.html).
+- **Encoder**: instead of using pytorch-transformers or Flair, you can customize or build your new encoder pipeline. See how we build our own Flair [in this demo](flairencode/my_flair.py) and import it into GNES using [`--py_path`](flairencode/Dockerfile). 
+- **Preprocessor**: this demo split a document into chunks using punctuations (the default behavior of `SentSplitPreprocessor`), you may   customize it as well.
+
+If you find any interesting results, please feel free to contribute.
+
+> We are considering using this demo as a part of integration test and add it to the CICD pipeline of [GNES master](https://github.com/gnes-ai/gnes). So we may keep the master branch of this demo as simple as possible 
 
 ## Troubleshooting
 
@@ -93,3 +106,4 @@ Thanks to the Docker cache, local change on the code may not be directly reflect
 #### Be careful on the version mismatch
 
 To update the local GNES image, please do `docker pull gnes/gnes:latest-alpine` **before**  `make build`.
+

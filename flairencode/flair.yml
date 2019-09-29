@@ -1,4 +1,4 @@
-!FlairEncoder
+!MyFlairEncoder
 parameters:
   pooling_strategy: mean
 gnes_config:

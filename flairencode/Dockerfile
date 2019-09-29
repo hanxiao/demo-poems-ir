@@ -16,4 +16,4 @@ RUN python -c "from gnes.encoder.text.flair import FlairEncoder; FlairEncoder().
 
 ADD *.py *.yml ./
 
-ENTRYPOINT ["gnes", "encode", "--yaml_path", "flair.yml", "--read_only"]
+ENTRYPOINT ["gnes", "encode", "--yaml_path", "flair.yml", "--py_path", "my_flair.py", "--read_only"]

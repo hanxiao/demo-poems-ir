@@ -26,7 +26,9 @@ class MyClient(CLIClient):
             print(colored(k.score.value, 'blue'))
             pprint.pprint(json.loads(k.score.explained))
             input('press any key to continue...')
-        input('on to next query, press any key to continue...')
+
+        if self.args.prompt:
+            input('on to next query, press any key to continue...')
 
 
 if __name__ == '__main__':
@@ -34,4 +36,6 @@ if __name__ == '__main__':
     parser.add_argument('--num_poems', type=int,
                         default=10,
                         help='number of poems to index')
+    parser.add_argument('--prompt', action='store_true', default=False,
+                        help='wait user input before showing the next result')
     MyClient(parser.parse_args())
