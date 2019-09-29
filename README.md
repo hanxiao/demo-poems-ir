@@ -18,6 +18,8 @@ docker swarm init
 make build
 ```
 
+You can also build DistilBert or Flair encoder by using `make build encoder=distilbert-` or `make build encoder=flair-`, respectively. Note the `-` at the end.
+
 ### (Optional - Not yet available on dockerhub) Download pre-built images
 
 If you have trouble building images yourself (e.g. due to slow connection or proxy issues), you can also pull our pre-build images for this demo. However, they may be outdated.   
@@ -33,7 +35,8 @@ make pull
 # start the index server stack
 make index
 # wait for a minute until all services started and grpc is ready
-make client_index
+# indexing 10 documents
+make client_index d=10
 ```
 
 <p align="center">
@@ -72,7 +75,7 @@ make client_query
 There are many ways to improve the quality of search results. To name a few,
 
 - **Score function**: right now the demo is using the average of all chunks' scores as the final relevance score. This can be improved by using more sophisticated scoring functions [as listed here](http://doc.gnes.ai/en/latest/api/gnes.score_fn.html).
-- **Encoder**: instead of using pytorch-transformers or Flair, you can customize or build your new encoder pipeline. See how we build our own Flair [in this demo](flairencode/my_flair.py) and import it into GNES using [`--py_path`](flairencode/Dockerfile). 
+- **Encoder**: instead of using pytorch-transformers or Flair, you can customize or build your new encoder pipeline. See how we build our own Flair [in this demo](flair-encode/my_flair.py) and import it into GNES using [`--py_path`](flair-encode/Dockerfile). 
 - **Preprocessor**: this demo split a document into chunks using punctuations (the default behavior of `SentSplitPreprocessor`), you may   customize it as well.
 
 If you find any interesting results, please feel free to contribute.

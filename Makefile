@@ -17,7 +17,7 @@ clean: ; docker stack rm my-gnes
 wait: ; @printf "sleep 15s for docker recycling network resources...\n"; sleep 15
 deploy_index: ; docker stack deploy --compose-file demo-poem-index.yml my-gnes
 deploy_query: ; docker stack deploy --compose-file demo-poem-query.yml my-gnes
-client_index: ; unset https_proxy && unset http_proxy && docker run --rm --network host -v ${PWD}/data:/data/ gnes/demo-poem:client --mode index --batch_size 4 --txt_file /data/kaggle_poem_dataset.csv
+client_index: ; unset https_proxy && unset http_proxy && docker run --rm --network host -v ${PWD}/data:/data/ gnes/demo-poem:client --mode index --batch_size 4 --num_poems $(d) --txt_file /data/kaggle_poem_dataset.csv
 client_query: ; unset https_proxy && unset http_proxy && docker run -it --rm --network host -v ${PWD}/data:/data/ gnes/demo-poem:client --mode query --txt_file /data/kaggle_poem_dataset.csv --prompt
 index: clean wait deploy_index
 query: clean wait deploy_query
